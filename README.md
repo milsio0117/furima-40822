@@ -17,17 +17,17 @@ has_many:orders
 
 
 ## Items
-|Column       |Type        |Options      |
-|-------------|------------|-------------|
-|title        | string     | null: false |
-|description  | text       | null: false |
-|postage_payer| string     | null: false |
-|shipping_days| strin      | null: false |
-|price        | integer    | null: false |
-|category     | references | null: false, foreign_key: true |
-|status       | references | null: false, foreign_key: true |
-|prefecture   | references | null: false, foreign_key: true |
-|seller       | references | null: false, foreign_key: true |
+|Column          |Type     |Options      |
+|----------------|---------|-------------|
+|title           | string  | null: false |
+|description     | text    | null: false |
+|postage_payer_id| integer | null: false, foreign_key: true |
+|shipping_days_id| integer | null: false, foreign_key: true |
+|price           | integer | null: false |
+|category_id     | integer | null: false, foreign_key: true |
+|status_id       | integer | null: false, foreign_key: true |
+|prefecture_id   | integer | null: false, foreign_key: true |
+|seller_id       | integer | null: false, foreign_key: true |
 
 ### Association
 belongs_to:user
@@ -35,11 +35,10 @@ has_one:order
 
 
 ## Orders
-|Column|Type        |Options                         |
-|------|------------|--------------------------------|
-|item  | references | null: false, foreign_key: true |
-|seller| references | null: false, foreign_key: true |
-|buyer | references | null: false, foreign_key: true |
+|Column   |Type     |Options                         |
+|---------|---------|--------------------------------|
+|item_id  | integer | null: false, foreign_key: true |
+|buyer_id | integer | null: false, foreign_key: true |
 
 ### Association
 has_one:shipping_address
@@ -47,16 +46,16 @@ belongs_to:item
 belongs_to:user
 
 
-## Shipping_addresses
+## ShippingAddresses
 |Column       |Type        |Options    |
 |-------------|------------|-----------|
-|order        | references | null: false, foreign_key: true |
-|postal_code  | integer    |null: false|
-|prefecture   | references | null: false, foreign_key: true |
-|city         | string     |null: false|
-|house_number | integer    |null: false|
-|building_name| string     |  |
-|phone_number | integer    |null: false|
+|order_id     | integer    | null: false, foreign_key: true |
+|postal_code  | string     | null: false|
+|prefecture_id| integer    | null: false, foreign_key: true |
+|city         | string     | null: false|
+|house_number | string     | null: false|
+|building_name| string     |            |
+|phone_number | string     | null: false|
 
 ### Association
 belongs_to:order
