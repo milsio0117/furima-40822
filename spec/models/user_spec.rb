@@ -102,6 +102,13 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
+      it 'passwordは全角文字なら新規登録できない' do
+        @user.password = '１１１１１１'
+        @user.password_confirmation = '１１１１１１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+
       it 'last_nameは全角文字以外なら新規登録できない' do
         @user.last_name = 'aiueo'
         @user.valid?
