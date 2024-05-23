@@ -24,15 +24,15 @@
     </div>
 
  <%# edit_item_path(@item.id),item_path(@item.id) %>
-  <% if @user == current_user %>
+  <% if user_signed_in? %>
+    <% if @user == current_user %>
     <%= link_to "商品の編集","#", method: :get, class: "item-red-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy" %>
-  <% end %>
-
-    <% if user_signed_in? && (@user != current_user) %>
+      <p class="or-text">or</p>
+      <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy" %>
+    <% else %>
     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
     <% end %>
+  <% end %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
