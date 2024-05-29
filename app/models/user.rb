@@ -10,6 +10,9 @@ class User < ApplicationRecord
   validates :last_name_kana, :first_name_kana, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/ }
   validate :validate_name_kana
 
+  has_many :items
+  has_many :orders
+
   def validate_name_kana
     errors.add(:last_name_kana, 'Input full-width katakana characters') if last_name_kana !~ /\A\p{katakana}+\z/
 
