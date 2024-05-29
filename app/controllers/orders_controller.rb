@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
     before_action :find_params, only: [:create, :index]
     before_action :own_item_or_sold_out, only:[:index]
+    before_action :authenticate_user!, only: [:index]
     
 
     def index
@@ -20,7 +21,6 @@ class OrdersController < ApplicationController
             @order_shipping_address.save
             return redirect_to root_path
         else
-            @item = Item.find(params[:item_id])
             gon.public_key = ENV['PAYJP_PUBLIC_KEY']
             render 'index', status: :unprocessable_entity
         end
