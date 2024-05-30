@@ -25,14 +25,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if @item.user_id == current_user.id
-
+    unless @item.user_id == current_user.id
     redirect_to root_path
+    end
   end
 
   def update
     if @item.update(item_params)
-      redirect_to edit_path(@item.id)
+      redirect_to item_path(@item.id)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
 
   def own_item_or_sold_out
     @item = Item.find(params[:id])
-    if (user_signed_in? && @item.user_id == current_user.id) || @item.order.present?
+    if !(user_signed_in? && @item.user_id == current_user.id) || @item.order.present?
         redirect_to root_path
     end
   end
