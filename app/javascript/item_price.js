@@ -8,10 +8,9 @@ function price(){
     inputPrice.addEventListener('input', function(){
         const inputValue = inputPrice.value
         addTaxPrice.innerHTML = Math.trunc(inputValue * 0.1)
-        profit.innerHTML =  Math.trunc(inputValue * 0.9)
+        profit.innerHTML =  Math.ceil(inputValue * 0.9)
     })
 
 }
 window.addEventListener('turbo:load', price)
-
-// rails assets:precompile
+window.addEventListener('turbo:render', price);
